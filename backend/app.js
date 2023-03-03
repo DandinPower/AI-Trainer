@@ -1,7 +1,9 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
-const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit')
+const bodyParser = require('body-parser')
+const redisClient = require('./libs/redis')
 const app = express()
 const port = process.env.SERVER_PORT
 const routes = require('./routes')
@@ -11,6 +13,7 @@ const limiter = rateLimit({
 })
 
 app.use(limiter)
+app.use(bodyParser.json());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(cors())

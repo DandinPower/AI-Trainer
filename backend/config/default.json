@@ -1,8 +1,14 @@
 {
     "error": {
-        
+        "INVALID_SIGN_UP_INPUT": "Every text field should be filled in.",
+        "DUPLICATE_ACCOUNT": "Account has already been used.",
+        "MISS_TOKEN": "Missing token.",
+        "INVALID_TOKEN": "Invalid token.",
+        "CAN_NOT_FIND_USER": "Can not find user.",
+        "PASSWORD_WRONG": "Wrong password."
     },
     "success": {
-        
+       "CREATE_USER": "Sign up successful.",
+       "SIGN_IN": "Sign in successful."
     }
 }

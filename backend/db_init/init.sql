@@ -13,19 +13,19 @@ create table User (
 
 create table Scene (
     sceneId int primary key auto_increment,
-    sceneName varchar(255) not null
-    description varchar(255) not null,
-    systemPrompt varchar(255) not null,
+    sceneName varchar(255) not null,
+    description text not null,
+    systemPrompt text not null
 );
 
 create table Chat (
     chatId int primary key auto_increment,
     sceneId int not null,
     chatName varchar(255) not null,
-    numberOfConversations int unsigned check (numberOfConversations BETWEEN 2 AND 100) not null,
+    numberOfConversations int unsigned check (numberOfConversations BETWEEN 2 AND 30) not null,
     characterName varchar(255) not null,
     characterGender char(1) check (characterGender in ('0', '1')) not null,
-    foreign key(sceneId)references Scene(sceneId)on delete cascade,
+    foreign key(sceneId)references Scene(sceneId)on delete cascade
 );
 
 create table UserChats (
@@ -39,9 +39,8 @@ create table UserChats (
 create table Conversation(
     conversationId int primary key auto_increment,
     chatId int,
-    userContent varchar(255) not null,
-    assistantContent varchar(255) not null,
+    userContent text not null,
+    assistantContent text not null,
     created_at timestamp default current_timestamp not null,
     foreign key(chatId)references Chat(chatId)on delete cascade
 );
-

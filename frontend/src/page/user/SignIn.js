@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,20 +10,38 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-
+import { SignIn_API } from '../../utils/api';
+import HintDialog from '../../components/hint'
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    try {
+      let res = await SignIn_API(data.get('account'), data.get('password'));
+      console.log(res)
+    }
+    catch (e){
+      handleOpen(e.response.data.message)
+    }
+  };
+
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleOpen = (message) => {
+    setOpen(true);
+    setMessage(message);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setMessage('');
   };
 
   return (
       <Container component="main" maxWidth="xs">
+        <HintDialog open={open} handleOpen={handleOpen} handleClose={handleClose} hintText={message} />
         <CssBaseline />
         <Box
           sx={{

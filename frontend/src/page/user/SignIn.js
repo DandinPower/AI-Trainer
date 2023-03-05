@@ -19,7 +19,9 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     try {
       let res = await SignIn_API(data.get('account'), data.get('password'));
-      console.log(res)
+      localStorage.setItem('token', res.data.token)
+      localStorage.setItem('nickName', res.data.nickName)
+      window.location.href = "/"
     }
     catch (e){
       handleOpen(e.response.data.message)

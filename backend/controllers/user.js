@@ -1,5 +1,6 @@
 const UserModel = require('../models/user')
 const config = require('config')
+const { GetUserDataFromJwt } = require('../libs/hash')
 
 const CREATE_USER = config.get('success.CREATE_USER')
 const SIGN_IN = config.get('success.SIGN_IN')
@@ -17,7 +18,8 @@ const UserController = {
     UserSignIn: async (req, res) => {
         try {
             const token = await UserModel.UserLogin(req.body.account, req.body.password)
-            res.json({token: token, message: SIGN_IN})
+            const {nickName} = await GetUserDataFromJwt(token)
+            res.json({token: token, nickName: nickName, message: SIGN_IN})
         }
         catch (e) {
             res.status(403).json({message: e.message})

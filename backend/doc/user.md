@@ -39,7 +39,8 @@
 
     ``` json
         {
-            "token": ""
+            "token": "",
+            "nickName": "",
             "message": ""
         }
     ```

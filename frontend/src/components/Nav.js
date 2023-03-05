@@ -5,33 +5,32 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogOut = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('nickName')
+    handleCloseUserMenu()
+    window.location.href = "/SignIn"
+  };
+
+  const nickName = localStorage.getItem('nickName')
 
   return (
     <AppBar position="static">
@@ -55,19 +54,6 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -87,6 +73,8 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
+
+          { nickName && (
           <Box sx={{ flexGrow: 0, marginLeft: 'auto'}}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -109,13 +97,15 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+            <MenuItem key={'Profile'} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{'Profile'}</Typography>
+            </MenuItem>
+            <MenuItem key={'Log out'} onClick={handleLogOut}>
+                <Typography textAlign="center">{'Log out'}</Typography>
+            </MenuItem>
             </Menu>
-          </Box>
+          </Box>)}
+          
         </Toolbar>
       </Container>
     </AppBar>

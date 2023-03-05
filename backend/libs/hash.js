@@ -35,4 +35,14 @@ const GetJwtToken = (userId, account, nickName) => {
     return token
 }
 
-module.exports = { HashPassword, ComparePassword, GetJwtToken }
+const GetUserDataFromJwt = (token) => {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, JWT_KEY, (err, userInfo) => {
+            if (err) return reject(err)
+            return resolve(userInfo)
+        });
+    })
+    
+}
+
+module.exports = { HashPassword, ComparePassword, GetJwtToken, GetUserDataFromJwt }

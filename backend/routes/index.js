@@ -11,4 +11,6 @@ router.get('/', AuthenticateToken, (req, res) => {
 router.post('/api/v1/SignUp', UserController.UserSignUp)
 router.post('/api/v1/SignIn', UserController.UserSignIn)
 
+router.post('/api/v1/BindKey', AuthenticateToken, UserController.UserBindKey)
+
 module.exports = router

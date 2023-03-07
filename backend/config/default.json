@@ -5,10 +5,13 @@
         "MISS_TOKEN": "Missing token.",
         "INVALID_TOKEN": "Invalid token.",
         "CAN_NOT_FIND_USER": "Can not find user.",
-        "PASSWORD_WRONG": "Wrong password."
+        "PASSWORD_WRONG": "Wrong password.",
+        "INVALID_OPEN": "Invalid OpenAI key",
+        "INVALID_AZURE": "Invalid azure speech key or region"
     },
     "success": {
        "CREATE_USER": "Sign up successful.",
-       "SIGN_IN": "Sign in successful."
+       "SIGN_IN": "Sign in successful.",
+       "BIND_CHECK": "check openId and Azure key successful."
     }
 }

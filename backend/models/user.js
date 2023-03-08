@@ -51,6 +51,31 @@ const UserModel = {
             PrintLog(e)
             throw Error(e)
         }
+    },
+    GetBindStatus: async (userId) => {
+        try {
+            let sql = `select openId, speechRegion, speechKey from User where userId = ${userId};`
+            let result = await ExecuteSql(sql)
+            if (result.length == 0) throw Error(CAN_NOT_FIND_USER)
+            const {openId, speechRegion, speechKey} = result[0]
+            if (!openId || !speechRegion || !speechKey) return false 
+            return true
+        }
+        catch (e) {
+            PrintLog(e)
+            throw Error(e)            
+        }
+    },
+    UnBindKey: async (userId) => {
+        try {
+            let sql = `update User set openId = NULL, speechRegion = NULL, speechKey = NULL where userId = ${userId};`
+            let result = await ExecuteSql(sql)
+            if (result.affectedRows == 0) throw Error(CAN_NOT_FIND_USER)
+        }
+        catch (e) {
+            PrintLog(e)
+            throw Error(e)            
+        }
     }
 }
 

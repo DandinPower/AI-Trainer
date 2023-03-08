@@ -12,5 +12,7 @@ router.post('/api/v1/SignUp', UserController.UserSignUp)
 router.post('/api/v1/SignIn', UserController.UserSignIn)
 
 router.post('/api/v1/BindKey', AuthenticateToken, UserController.UserBindKey)
+router.get('/api/v1/BindStatus', AuthenticateToken, UserController.GetBindStatus)
+router.get('/api/v1/UnBindKey', AuthenticateToken, UserController.UnBindKey)
 
 module.exports = router

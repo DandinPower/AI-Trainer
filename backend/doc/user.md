@@ -82,3 +82,39 @@
         }
     ```
 
+### Check User Bind Status
+
+- GET
+- hostname/api/v1/BindStatus
+- Header
+    ``` json
+        {
+            "authorization": "token"
+        }
+    ```
+- RES
+
+    ``` json
+        {
+            "bindStatus": true,
+            "message": ""
+        }
+    ```
+### UnBind OpenAi and Azure key
+
+- GET
+- hostname/api/v1/UnBindKey
+- Header
+    ``` json
+        {
+            "authorization": "token"
+        }
+    ```
+- RES
+
+    ``` json
+        {
+            "message": ""
+        }
+    ```
+

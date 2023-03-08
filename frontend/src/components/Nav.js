@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,9 +11,13 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
+import BindKeyDialog from './bindKey' 
+import HintDialog from './hint';
 
 function ResponsiveAppBar() {
+  const [hintMessage, setHintMessage] = useState('');
+  const [openHint, setOpenHint] = useState(false);
+  const [openBind, setOpenBind] = useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -31,6 +36,25 @@ function ResponsiveAppBar() {
   };
 
   const nickName = localStorage.getItem('nickName')
+
+  const handleOpenDialog = () => {
+    handleCloseUserMenu()
+    setOpenBind(true);
+  };
+
+  const handleCloseDialog = (status, message) => {
+    setHintMessage(message)
+    setOpenBind(false);
+    if (status === true) handleOpenHint();
+  };
+
+  const handleOpenHint = () => {
+    setOpenHint(true);
+  };
+
+  const handleCloseHint = () => {
+    setOpenHint(false);
+  };
 
   return (
     <AppBar position="static">
@@ -97,8 +121,8 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-            <MenuItem key={'Profile'} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{'Profile'}</Typography>
+            <MenuItem key={'BindKey'} onClick={handleOpenDialog}>
+                  <Typography textAlign="center">{'BindKey'}</Typography>
             </MenuItem>
             <MenuItem key={'Log out'} onClick={handleLogOut}>
                 <Typography textAlign="center">{'Log out'}</Typography>
@@ -108,6 +132,8 @@ function ResponsiveAppBar() {
           
         </Toolbar>
       </Container>
+      <BindKeyDialog open={openBind} handleOpen={handleOpenDialog} handleClose={handleCloseDialog}/>
+      <HintDialog open={openHint} handleOpen={handleOpenHint} handleClose={handleCloseHint} hintText={hintMessage} />
     </AppBar>
   );
 }

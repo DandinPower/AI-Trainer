@@ -4,7 +4,7 @@
 
 - POST
 - hostname/api/v1/SignUp
-- REQ
+- body
 
     ``` json
         {
@@ -26,7 +26,7 @@
 
 - POST
 - hostname/api/v1/SignIn
-- REQ
+- body
 
     ``` json
         {
@@ -53,6 +53,32 @@
     ``` json
         {
             "authorization": "token"
+        }
+    ```
+
+### Bind OpenAi and Azure Key
+
+- POST
+- hostname/api/v1/BindKey
+- Header
+    ``` json
+        {
+            "authorization": "token"
+        }
+    ```
+- body
+    ``` json
+        {
+            "openId":"",
+            "speechRegion":"",
+            "speechKey":""
+        }
+    ```
+- RES
+
+    ``` json
+        {
+            "message": ""
         }
     ```
 

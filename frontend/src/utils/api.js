@@ -16,7 +16,7 @@ export function SignIn_API(account, password) {
 
 export function TestToken(token) {
     return axios.get(`${HOSTNAME}/`, 
-        { headers: { 'Authorization': `Bearer ${token}` } }    
+        { headers: { 'authorization': `${token}` } }    
     )
 }
         

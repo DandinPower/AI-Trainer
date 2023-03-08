@@ -39,6 +39,18 @@ const UserModel = {
             PrintLog(e)
             throw Error(e)
         }
+    },
+    BindKey: async (userId, keys) => {
+        const { openId, speechRegion, speechKey } = keys
+        try {
+            let bindSql = `update User set openId = "${openId}", speechRegion = "${speechRegion}", speechKey = "${speechKey}" where userId = ${userId};`
+            let result = await ExecuteSql(bindSql)
+            if (result.affectedRows == 0) throw Error(CAN_NOT_FIND_USER)
+        }
+        catch (e) {
+            PrintLog(e)
+            throw Error(e)
+        }
     }
 }
 

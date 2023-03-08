@@ -36,6 +36,7 @@ const UserController = {
             const { openId, speechRegion, speechKey } = req.body 
             await OpenAIModel.CheckOpenId(openId)
             await AzureModel.CheckAzureId(speechRegion, speechKey)
+            await UserModel.BindKey(userId, { openId: openId, speechRegion: speechRegion, speechKey: speechKey})
             res.json({message: BIND_CHECK})
         }
         catch (e) {

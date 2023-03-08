@@ -12,6 +12,6 @@
     "success": {
        "CREATE_USER": "Sign up successful.",
        "SIGN_IN": "Sign in successful.",
-       "BIND_CHECK": "check openId and Azure key successful."
+       "BIND_CHECK": "bind openId and Azure key successful."
     }
 }
